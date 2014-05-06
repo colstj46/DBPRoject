@@ -33,8 +33,13 @@ public class SQLClass {
             Connection conn = DriverManager.getConnection(dbURL,user,pw);
             System.out.println("Connection successfully made");
             PreparedStatement stmt = null;
-            if(query == 1)
-            	stmt = conn.prepareStatement("SELECT * FROM Student;");
+            if(query == 1){
+            	if(f.length()==7){
+            		stmt = conn.prepareStatement("SELECT Crit_ID, t.AssessmentID, Sem_Start, AVG(Score) as Average" +
+            			"FROM Takes t, Assessment a WHERE Crit_ID = '"+f+"' AND t.AssessmentID = a.AssessmentID" +
+            			"AND a.AssessmentID = '"+f.substring(0,5)+"' AND Sem_Start = '"+f.substring(2,5)+"';");
+            		}
+            }
             else if(query == 2)
             	stmt = conn.prepareStatement("SELECT * FROM Student;");
             else if(query == 3)
