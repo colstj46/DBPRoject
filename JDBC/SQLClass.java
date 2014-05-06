@@ -43,8 +43,10 @@ public class SQLClass {
             }
             else if(query == 2)
             	if(f.length()>=5){
-            		stmt = conn.prepareStatement("SELECT DISTINCT Crit_ID, AssessmentID, (SELECT AVG(Score) FROM Takes a WHERE a.Crit_ID = t.Crit_ID) AS Average FROM Takes t WHERE Crit_ID = '"+f+" AND SEM_START = '"+f.substring(3,5)+"';");
-            		}
+            		stmt = conn.prepareStatement("SELECT Crit_ID, t.AssessmentID, Sem_Start, AVG(Score) as Average " +
+                			"FROM Takes t, Assessment a WHERE a.AssessmentID = '"+f+"' AND t.AssessmentID = a.AssessmentID " +
+                			" AND Sem_Start = '"+f.substring(2,5)+"';");
+                		}
             else if(query == 3)
         		stmt = conn.prepareStatement("SELECT * FROM Student;");
             else if(query == 4)
