@@ -9,6 +9,7 @@ import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.table.DefaultTableModel;
 
 public class SQLClass {
@@ -71,9 +72,13 @@ public class SQLClass {
             conn.close();
         }
         catch (SQLException e)
-        {System.out.println("SQL Error " + e.getMessage());}
+        {System.out.println("SQL Error " + e.getMessage());
+        JTextArea text = new JTextArea(e.getMessage());
+        JOptionPane.showMessageDialog(null, text,"Error",1);}
         catch (Exception e)
-        {System.out.println("General Error " + e.getMessage() + e.getStackTrace());}
+        {System.out.println("General Error " + e.getMessage() + e.getStackTrace());
+        JTextArea text = new JTextArea(e.getMessage());
+        JOptionPane.showMessageDialog(null, text,"Error",1);}
     }
     
     public static DefaultTableModel buildTableModel(ResultSet rs)

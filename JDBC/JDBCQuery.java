@@ -30,10 +30,9 @@ public class JDBCQuery{
     	frame = new JFrame();
     	frame.setName("Student Assesment Item Info");
     	frame.setSize(582, 550);
-    	frame.setVisible(true);
     	SpringLayout springLayout = new SpringLayout();
     	frame.getContentPane().setLayout(springLayout);
-
+    	frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
 
     	JLabel lblWelcomeToOur = new JLabel("Welcome to our program. Suck it");
     	springLayout.putConstraint(SpringLayout.NORTH, lblWelcomeToOur, 7, SpringLayout.NORTH, frame.getContentPane());
@@ -78,7 +77,7 @@ public class JDBCQuery{
     	springLayout.putConstraint(SpringLayout.SOUTH, rdbtnQ2, 130, SpringLayout.NORTH, frame.getContentPane());
     	springLayout.putConstraint(SpringLayout.EAST, rdbtnQ2, 336, SpringLayout.WEST, frame.getContentPane());
     	frame.getContentPane().add(rdbtnQ2);
-    	rdbtnQ2.setVisible(false);
+    	rdbtnQ2.setVisible(true);
     	bg.add(rdbtnQ2);
 
     	textField_1 = new JTextField();
@@ -288,8 +287,7 @@ public class JDBCQuery{
     	btnNewButton.setVisible(true);
     	frame.getContentPane().add(btnNewButton);
 
-
-
+    	frame.setVisible(true);
     }
 
 }
