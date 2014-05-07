@@ -25,6 +25,8 @@ public class JDBCQuery{
 	private static JTextField textField_3;
 	private static JTextField textField_4;
 	private static JTextField textField_5;
+	private static JTextField textField_7;
+	private static JTextField textField_8;
     public static void main ( String [] args ){
 
     	frame = new JFrame();
@@ -32,7 +34,7 @@ public class JDBCQuery{
     	frame.setSize(582, 550);
     	SpringLayout springLayout = new SpringLayout();
     	frame.getContentPane().setLayout(springLayout);
-    	frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
+    	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     	JLabel lblWelcomeToOur = new JLabel("Welcome to our program. Suck it");
     	springLayout.putConstraint(SpringLayout.NORTH, lblWelcomeToOur, 7, SpringLayout.NORTH, frame.getContentPane());
@@ -52,7 +54,7 @@ public class JDBCQuery{
 
     	ButtonGroup bg = new ButtonGroup();
 
-    	final JRadioButton rdbtnQ1 = new JRadioButton("Average score based on criterion ex.(A1F12C2)");
+    	final JRadioButton rdbtnQ1 = new JRadioButton("Average score based on criterion ex.(A1F10C2)");
     	springLayout.putConstraint(SpringLayout.NORTH, rdbtnQ1, 71, SpringLayout.NORTH, frame.getContentPane());
     	springLayout.putConstraint(SpringLayout.WEST, rdbtnQ1, 7, SpringLayout.WEST, frame.getContentPane());
     	springLayout.putConstraint(SpringLayout.SOUTH, rdbtnQ1, 98, SpringLayout.NORTH, frame.getContentPane());
@@ -71,16 +73,16 @@ public class JDBCQuery{
     	textField.setColumns(10);
     	textField.setVisible(true);
 
-    	final JRadioButton rdbtnQ2 = new JRadioButton("Average score based on CDAI with Semester ex.(A1F12)");
+    	final JRadioButton rdbtnQ2 = new JRadioButton("Average score for each crit based on CDAI with Semester ex.(A1F10)");
     	springLayout.putConstraint(SpringLayout.NORTH, rdbtnQ2, 102, SpringLayout.NORTH, frame.getContentPane());
     	springLayout.putConstraint(SpringLayout.WEST, rdbtnQ2, 7, SpringLayout.WEST, frame.getContentPane());
     	springLayout.putConstraint(SpringLayout.SOUTH, rdbtnQ2, 130, SpringLayout.NORTH, frame.getContentPane());
-    	springLayout.putConstraint(SpringLayout.EAST, rdbtnQ2, 336, SpringLayout.WEST, frame.getContentPane());
     	frame.getContentPane().add(rdbtnQ2);
     	rdbtnQ2.setVisible(true);
     	bg.add(rdbtnQ2);
 
     	textField_1 = new JTextField();
+    	springLayout.putConstraint(SpringLayout.EAST, rdbtnQ2, -6, SpringLayout.WEST, textField_1);
     	springLayout.putConstraint(SpringLayout.NORTH, textField_1, 102, SpringLayout.NORTH, frame.getContentPane());
     	springLayout.putConstraint(SpringLayout.WEST, textField_1, 445, SpringLayout.WEST, frame.getContentPane());
     	springLayout.putConstraint(SpringLayout.SOUTH, textField_1, 130, SpringLayout.NORTH, frame.getContentPane());
@@ -89,7 +91,7 @@ public class JDBCQuery{
     	frame.getContentPane().add(textField_1);
     	textField_1.setVisible(true);
 
-    	final JRadioButton rdbtnQ3 = new JRadioButton("Average score based on CDAI ex.(A1)");
+    	final JRadioButton rdbtnQ3 = new JRadioButton("Average score for each crit based on CDAI ex.(A1)");
     	springLayout.putConstraint(SpringLayout.NORTH, rdbtnQ3, 134, SpringLayout.NORTH, frame.getContentPane());
     	springLayout.putConstraint(SpringLayout.WEST, rdbtnQ3, 7, SpringLayout.WEST, frame.getContentPane());
     	springLayout.putConstraint(SpringLayout.SOUTH, rdbtnQ3, 162, SpringLayout.NORTH, frame.getContentPane());
@@ -107,7 +109,7 @@ public class JDBCQuery{
     	frame.getContentPane().add(textField_2);
     	textField_2.setVisible(true);
 
-    	final JRadioButton rdbtnQ4 = new JRadioButton("Average score for all CDAI with semester ex.(A1F12)");
+    	final JRadioButton rdbtnQ4 = new JRadioButton("Average score for all CDAI with Semester ex.(A1F10)");
     	springLayout.putConstraint(SpringLayout.NORTH, rdbtnQ4, 166, SpringLayout.NORTH, frame.getContentPane());
     	springLayout.putConstraint(SpringLayout.WEST, rdbtnQ4, 7, SpringLayout.WEST, frame.getContentPane());
     	springLayout.putConstraint(SpringLayout.SOUTH, rdbtnQ4, 194, SpringLayout.NORTH, frame.getContentPane());
@@ -115,8 +117,17 @@ public class JDBCQuery{
     	frame.getContentPane().add(rdbtnQ4);
     	rdbtnQ4.setVisible(true);
     	bg.add(rdbtnQ4);
+    	
+    	textField_7 = new JTextField();
+    	springLayout.putConstraint(SpringLayout.NORTH, textField_7, 6, SpringLayout.SOUTH, textField_2);
+    	springLayout.putConstraint(SpringLayout.WEST, textField_7, 0, SpringLayout.WEST, textField);
+    	springLayout.putConstraint(SpringLayout.SOUTH, textField_7, 34, SpringLayout.SOUTH, textField_2);
+    	springLayout.putConstraint(SpringLayout.EAST, textField_7, 0, SpringLayout.EAST, textField);
+    	frame.getContentPane().add(textField_7);
+    	textField_7.setColumns(10);
+    	textField_7.setVisible(true);
 
-    	final JRadioButton rdbtnQ5 = new JRadioButton("Average score for all CDAI  ex.(A1)");
+    	final JRadioButton rdbtnQ5 = new JRadioButton("Average score for all CDAI ex.(A1)");
     	springLayout.putConstraint(SpringLayout.NORTH, rdbtnQ5, 198, SpringLayout.NORTH, frame.getContentPane());
     	springLayout.putConstraint(SpringLayout.WEST, rdbtnQ5, 7, SpringLayout.WEST, frame.getContentPane());
     	springLayout.putConstraint(SpringLayout.SOUTH, rdbtnQ5, 226, SpringLayout.NORTH, frame.getContentPane());
@@ -124,6 +135,15 @@ public class JDBCQuery{
     	frame.getContentPane().add(rdbtnQ5);
     	rdbtnQ5.setVisible(true);
     	bg.add(rdbtnQ5);
+    	
+    	textField_8 = new JTextField();
+    	springLayout.putConstraint(SpringLayout.NORTH, textField_8, 0, SpringLayout.NORTH, rdbtnQ5);
+    	springLayout.putConstraint(SpringLayout.WEST, textField_8, 0, SpringLayout.WEST, textField);
+    	springLayout.putConstraint(SpringLayout.SOUTH, textField_8, 0, SpringLayout.SOUTH, rdbtnQ5);
+    	springLayout.putConstraint(SpringLayout.EAST, textField_8, -29, SpringLayout.EAST, frame.getContentPane());
+    	frame.getContentPane().add(textField_8);
+    	textField_8.setColumns(10);
+    	textField_8.setVisible(true);
 
     	final JRadioButton rdbtnQ6 = new JRadioButton("Identify CDAI with highest average score");
     	springLayout.putConstraint(SpringLayout.NORTH, rdbtnQ6, 230, SpringLayout.NORTH, frame.getContentPane());
@@ -251,11 +271,11 @@ public class JDBCQuery{
     				System.out.println("Table Added");
 
     			}else if(rdbtnQ4.isSelected()){
-    				SQLClass.TestJDBC(4,"","");
+    				SQLClass.TestJDBC(4,textField_7.getText(),"");
     				System.out.println("Table Added");
 
     			}else if(rdbtnQ5.isSelected()){
-    				SQLClass.TestJDBC(5,"","");
+    				SQLClass.TestJDBC(5,textField_8.getText(),"");
     				System.out.println("Table Added");
 
     			}else if(rdbtnQ6.isSelected()){
@@ -286,8 +306,8 @@ public class JDBCQuery{
     	springLayout.putConstraint(SpringLayout.EAST, btnNewButton, 0, SpringLayout.EAST, textField);
     	btnNewButton.setVisible(true);
     	frame.getContentPane().add(btnNewButton);
+    	
 
     	frame.setVisible(true);
     }
-
 }

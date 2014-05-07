@@ -39,33 +39,73 @@ public class SQLClass {
             		stmt = conn.prepareStatement("SELECT Crit_ID, t.AssessmentID, Sem_Start, AVG(Score) as Average " +
             			"FROM Takes t, Assessment a WHERE Crit_ID = '"+f+"' AND t.AssessmentID = a.AssessmentID " +
             			"AND a.AssessmentID = '"+f.substring(0,5)+"' AND Sem_Start = '"+f.substring(2,5)+"';");
-            		}
+            	}
+            	else{
+            		JOptionPane.showMessageDialog(null, "Invalid Criterion");
+            		return;
+            	}
             }
             else if(query == 2)
-            	if(f.length()>=5){
-            		stmt = conn.prepareStatement("SELECT Crit_ID, t.AssessmentID, Sem_Start, AVG(Score) as Average " +
+            	if(f.length()==5){
+            		stmt = conn.prepareStatement("SELECT DISTINCT Crit_ID,t.AssessmentID, Sem_Start, (SELECT AVG(Score) FROM Takes b WHERE b.Crit_ID = t.Crit_ID) as Average " +
                 			"FROM Takes t, Assessment a WHERE a.AssessmentID = '"+f+"' AND t.AssessmentID = a.AssessmentID " +
-                			" AND Sem_Start = '"+f.substring(2,5)+"';");
-                		}
+                			"AND Sem_Start = '"+f.substring(2,5)+"';");
+                }
+            	else{
+            		JOptionPane.showMessageDialog(null, "Invalid CDAI with Semester");
+            		return;
+            	}
             else if(query == 3)
-        		stmt = conn.prepareStatement("SELECT * FROM Student;");
+            	if(f.length() == 2){
+            		stmt = conn.prepareStatement("SELECT DISTINCT Crit_ID, (SELECT AVG(Score) FROM Takes a WHERE a.Crit_ID = t.Crit_ID)"+
+            				" AS Average FROM Takes t WHERE AssessmentID LIKE '"+f+"%';");
+            	}
+            	else{
+            		JOptionPane.showMessageDialog(null, "Invalid CDAI");
+            		return;
+            	}
             else if(query == 4)
-        		stmt = conn.prepareStatement("SELECT * FROM Student;");
+            	if(f.length() == 5){
+            		stmt = conn.prepareStatement("SELECT t.AssessmentID, Sem_Start, AVG(Score) AS Average FROM Takes t, Assessment a " +
+        				"WHERE a.AssessmentID = '"+f+"' AND t.AssessmentID = a.AssessmentID AND Sem_Start = '"+f.substring(2,5)+"';");
+        		}
+            	else{
+            		JOptionPane.showMessageDialog(null, "Invalid CDAI with Semester");
+            		return;
+            	}
             else if(query == 5)
-        		stmt = conn.prepareStatement("SELECT * FROM Student;");
+            	if(f.length() == 2)
+            		stmt = conn.prepareStatement("SELECT AssessmentID, AVG(Score) as Average FROM Takes WHERE AssessmentID LIKE '"+f+"%';");
+            	else{
+            		JOptionPane.showMessageDialog(null, "Invalid CDAI");
+            		return;
+            	}
             else if(query == 6)
-        		stmt = conn.prepareStatement("SELECT * FROM Student;");
+        		stmt = conn.prepareStatement("SELECT AssessmentID, MAX(Average) FROM (SELECT DISTINCT Assessment, "+
+        				"(SELECT AVG(Score) From Takes b WHERE a.AssessmentID = b.AssessmentID) as Average FROM Takes a) t;");
             else if(query == 7)
-        		stmt = conn.prepareStatement("SELECT * FROM Student;");
+        		stmt = conn.prepareStatement("SELECT AssessmentID, MIN(Average) FROM (SELECT DISTINCT AssessmentID, "+
+        				"(SELECT AVG(Score) FROM Takes b WHERE a.AssessmentID = b.AssessmentID) as Average FROM Takes a) t;");
             else if(query == 8)
-        		stmt = conn.prepareStatement("SELECT * FROM Student;");
+        		stmt = conn.prepareStatement("SELECT Emph, (SELECT AVG(Score) FROM Takes a WHERE t.UniversityID = a.UniversityID) "+
+        				"AS Average, (SELECT MIN(Score) FROM Takes a WHERE t.UniversityID = a.UniversityID) AS Lowest, (SELECT MAX(Score) FROM "+
+        				"Takes a WHERE t.UniversityID = a.UniversityID) AS Highest FROM Emphasis e, Takes t WHERE e.UniversityID = t.UniversityID "+
+        				"GROUP BY Emph;");
             else if(query == 9)
-        		stmt = conn.prepareStatement("SELECT * FROM Student;");
+        		stmt = conn.prepareStatement("SELECT F_Name, L_Name, AssessmentID, Crit_ID, Score FROM Student s, Takes t "+
+        				"WHERE F_Name = '"+f+"' AND L_Name LIKE '%"+l+"%' AND s.UniversityID = t.UniversityID;");
             else if(query == 10)
-        		stmt = conn.prepareStatement("SELECT * FROM Student;");
+        		stmt = conn.prepareStatement("SELECT F_Name, L_Name, (SELECT AVG(Score) FROM Takes a WHERE s.UniversityID = a.UniversityID) "+
+        				"as Average, (SELECT MIN(Score) FROM Takes a WHERE s.UniversityID = a.UniversityID) as Lowest, (SELECT MAX(Score) "+
+        				"FROM Takes a WHERE s.UniversityID = a.UniversityID) as Highest, Crit_ID, Score FROM Student s, Takes t "+
+        				"WHERE F_Name = '"+f+"' AND L_Name LIKE '%"+l+"%' AND s.UniversityID = t.UniversityID;");
             
             ResultSet rs = stmt.executeQuery();
             DefaultTableModel dtm = buildTableModel(rs);
+            if(dtm.getValueAt(0,0) == null){
+            	JOptionPane.showMessageDialog(null, "No Results Found");
+            	return;
+            }
             JTable table = new JTable(dtm);
             JScrollPane pane = new JScrollPane(table);
             JOptionPane.showMessageDialog(null, pane,"Query "+ query,1);
@@ -112,7 +152,7 @@ public class SQLClass {
 
     public static void main(String [] args) {
 
-        TestJDBC(1,"","");
+        TestJDBC(2,"C1S11","");
 
     }
 }
