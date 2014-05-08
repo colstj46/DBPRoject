@@ -99,6 +99,16 @@ public class SQLClass {
         				"as Average, (SELECT MIN(Score) FROM Takes a WHERE s.UniversityID = a.UniversityID) as Lowest, (SELECT MAX(Score) "+
         				"FROM Takes a WHERE s.UniversityID = a.UniversityID) as Highest, Crit_ID, Score FROM Student s, Takes t "+
         				"WHERE F_Name = '"+f+"' AND L_Name LIKE '%"+l+"%' AND s.UniversityID = t.UniversityID;");
+            else if(query == 11)
+            	stmt = conn.prepareStatement("SELECT * FROM Student;");
+            else if(query == 12)
+            	stmt = conn.prepareStatement("SELECT * FROM Assessment;");
+            else if(query == 13)
+            	stmt = conn.prepareStatement("SELECT * FROM Takes;");
+            else if(query == 14)
+            	stmt = conn.prepareStatement("SELECT * FROM Emphasis;");
+            else if(query == 15)
+            	stmt = conn.prepareStatement("SELECT * FROM Criteria;");
             
             ResultSet rs = stmt.executeQuery();
             DefaultTableModel dtm = buildTableModel(rs);
