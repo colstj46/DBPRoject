@@ -32,7 +32,8 @@ public class JDBCQuery{
 
     	frame = new JFrame();
     	frame.getContentPane().setBackground(Color.LIGHT_GRAY);
-    	frame.setName("Student Assesment Item Info");
+    	frame.setName("Student Assessment Item Info");
+    	frame.setTitle("Student Assessment Program");
     	frame.setSize(582, 630);
     	SpringLayout springLayout = new SpringLayout();
     	frame.getContentPane().setLayout(springLayout);

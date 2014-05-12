@@ -26,7 +26,24 @@ public class SQLClass {
         String db = Login.DB;
         String user = Login.USER;
         String pw = Login.PWD;
-
+        
+        String queries[] = new String[15];
+        queries[0] = "Average Score Based on Criteria";
+        queries[1] = "Average Score Based on CDAI with Semester";
+        queries[2] = "Average Score Based on CDAI";
+        queries[3] = "Average Score for all CDAI with Semester";
+        queries[4] = "Average Score for all CDAI";
+        queries[5] = "CDAI with Highest Average Score";
+        queries[6] = "CDAI with Lowest Average Score";
+        queries[7] = "Average, Lowest, Highest Scores Over all CDAI";
+        queries[8] = "All CDAI for a Student";
+        queries[9] = "Average, Lowest, Highest Scores Over all CDAI for a Student";
+        queries[10] = "Full Student Table";
+        queries[11] = "Full Assessment Table";
+        queries[12] = "Full Takes Table";
+        queries[13] = "Full Emphasis Table";
+        queries[14] = "Full Criteria Table";
+ 
         try{
             Class.forName(Login.DRIVER_CLASS);  // register the driver
             String dbURL = Login.DRIVER+db+"?connectTimeout=10000";
@@ -118,7 +135,7 @@ public class SQLClass {
             }
             JTable table = new JTable(dtm);
             JScrollPane pane = new JScrollPane(table);
-            JOptionPane.showMessageDialog(null, pane,"Query "+ query,1);
+            JOptionPane.showMessageDialog(null, pane,queries[query-1],1);
             rs.close();
             stmt.close();
             conn.close();
